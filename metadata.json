@@ -1,0 +1,5 @@
+{
+  "name": "Mermaid PR Extractor",
+  "description": "A developer tool to extract, view, and export Mermaid diagrams from GitHub Pull Requests conversations.",
+  "requestFramePermissions": []
+}
