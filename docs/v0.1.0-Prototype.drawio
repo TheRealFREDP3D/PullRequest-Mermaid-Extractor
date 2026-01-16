@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <mxfile host="codeviz.app" modified="2026-01-16T08:03:49.403Z" agent="CodeViz Exporter" version="14.6.5" type="device">
+          <diagram id="codeviz-diagram" name="System Diagram">
+            <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+              <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="base.cv::pullRequestMermaidExtractor_webapp" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="base.cv::pullRequestMermaidExtractor">
+                  <mxGeometry x="40" y="-41" width="1204" height="717" as="geometry"/>
+                </mxCell>
+                <mxCell id="base.cv::pullRequestMermaidExtractor_webapp_label" value="**Web Application**" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="base.cv::pullRequestMermaidExtractor">
+                  <mxGeometry x="48" y="-33" width="1128" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="__uml__base.cv">
+                  <mxGeometry x="32" y="149" width="1244" height="862" as="geometry"/>
+                </mxCell>
+                <mxCell id="base.cv::pullRequestMermaidExtractor_label" value="**Pull Request Mermaid Extractor**" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="__uml__base.cv">
+                  <mxGeometry x="40" y="157" width="1168" height="24" as="geometry"/>
+                </mxCell>
+<mxCell id="__uml__base.cv" value="" style="html=1;whiteSpace=wrap;container=1;fillColor=#dae8fc;strokeColor=#6c8ebf;dashed=1;fillOpacity=20;strokeWidth=2;containerType=none;recursiveResize=0;movable=1;resizable=1;autosize=0;dropTarget=0" vertex="1" parent="1">
+                  <mxGeometry x="12" y="12" width="1284" height="1184" as="geometry"/>
+                </mxCell>
+                <mxCell id="__uml__base.cv_label" value="base.cv" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;labelBackgroundColor=white;spacing=5" vertex="1" parent="1">
+                  <mxGeometry x="20" y="20" width="1208" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="base.cv::pullRequestMermaidExtractor_webapp_app" value="**Application Orchestrator**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="423.25" y="179" width="297" height="120" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor_webapp_github_service" value="**GitHub Service Client**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="509.5" y="465" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor_webapp_parser" value="**Diagram Parsing Utility**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="826.5" y="465" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor_webapp_diagram_card" value="**Diagram Card Component**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="20" y="349" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor_webapp_diagram_modal" value="**Diagram Modal Component**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="337" y="349" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::pullRequestMermaidExtractor_webapp_mermaid_renderer" value="**Mermaid Renderer Component**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="base.cv::pullRequestMermaidExtractor_webapp">
+                      <mxGeometry x="178.5" y="581" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::developer" value="**Developer**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="__uml__base.cv">
+                      <mxGeometry x="463.25" y="60" width="297" height="96" as="geometry"/>
+                    </mxCell>
+<mxCell id="base.cv::github" value="**GitHub**" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5" vertex="1" parent="__uml__base.cv">
+                      <mxGeometry x="549.5" y="1048" width="297" height="96" as="geometry"/>
+                    </mxCell>
+                <mxCell id="edge-base.cv::e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_app" target="base.cv::pullRequestMermaidExtractor_webapp_github_service">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e1_label" value="Calls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e1">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_app" target="base.cv::pullRequestMermaidExtractor_webapp_parser">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e2_label" value="Uses to extract diagrams and get theme colors" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e2">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_app" target="base.cv::pullRequestMermaidExtractor_webapp_diagram_card">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e3_label" value="Renders and passes props to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e3">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_app" target="base.cv::pullRequestMermaidExtractor_webapp_diagram_modal">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e4_label" value="Renders and passes props to" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e4">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_diagram_modal" target="base.cv::pullRequestMermaidExtractor_webapp_mermaid_renderer">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e5_label" value="Renders" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e5">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_diagram_card" target="base.cv::pullRequestMermaidExtractor_webapp_mermaid_renderer">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e6_label" value="Renders" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e6">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::developer" target="base.cv::pullRequestMermaidExtractor_webapp_app">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e7_label" value="Uses" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e7">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+<mxCell id="edge-base.cv::e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#808080;strokeWidth=2;jumpStyle=arc;jumpSize=10;spacing=15;labelBackgroundColor=white;labelBorderColor=none" edge="1" parent="1" source="base.cv::pullRequestMermaidExtractor_webapp_github_service" target="base.cv::github">
+                    <mxGeometry relative="1" as="geometry"/>
+                  </mxCell>
+                  <mxCell id="edge-base.cv::e8_label" value="Fetches Pull Requests and Comments from" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="edge-base.cv::e8">
+                    <mxGeometry x="-0.2" y="10" relative="1" as="geometry">
+                      <mxPoint as="offset"/>
+                    </mxGeometry>
+                  </mxCell>
+              </root>
+            </mxGraphModel>
+          </diagram>
+        </mxfile>
