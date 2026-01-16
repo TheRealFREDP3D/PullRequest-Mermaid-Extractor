@@ -30,7 +30,7 @@ const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, 
       if (typeof window.mermaid === 'undefined') {
         const MAX_POLL_ATTEMPTS = 50; // ~5 seconds timeout
         let pollAttempts = 0;
-        let timeoutId: NodeJS.Timeout | null = null;
+        let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
         const checkMermaid = async () => {
           if (!isMounted) return;
