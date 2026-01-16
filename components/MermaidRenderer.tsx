@@ -14,12 +14,29 @@ const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, 
   const containerRef = useRef<HTMLDivElement>(null);
   const [svgContent, setSvgContent] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let isMounted = true;
 
     const renderDiagram = async () => {
-      if (!code || typeof mermaid === 'undefined') return;
+      if (!code) return;
+
+      // Wait for mermaid to be available
+      if (typeof mermaid === 'undefined') {
+        const checkMermaid = () => {
+          if (typeof mermaid !== 'undefined') {
+            setIsLoading(false);
+            renderDiagram();
+          } else {
+            setTimeout(checkMermaid, 100);
+          }
+        };
+        checkMermaid();
+        return;
+      }
+
+      setIsLoading(false);
 
       try {
         mermaid.initialize({
@@ -60,7 +77,11 @@ const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, 
       className={`mermaid-container ${className} ${onClick ? 'cursor-pointer' : ''}`}
       onClick={onClick}
     >
-      {error ? (
+      {isLoading ? (
+        <div className="flex items-center justify-center h-full min-h-[150px] bg-gray-900/20 border border-gray-500/30 rounded p-4 text-gray-400 text-sm text-center">
+          <div className="animate-pulse">Loading diagram renderer...</div>
+        </div>
+      ) : error ? (
         <div className="flex items-center justify-center h-full min-h-[150px] bg-red-900/20 border border-red-500/30 rounded p-4 text-red-400 text-sm text-center">
           <p>{error}</p>
         </div>
