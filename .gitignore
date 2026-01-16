@@ -24,3 +24,4 @@ dist-ssr
 .DEV/Technical Retrospective_ Developing the Mermaid PR Extractor Prototype (v0.1.0).md
 .DEV/The_Mermaid_PR_Extractor.mp4
 .DEV/Visualizing the Invisible_ 5 Surprising Insights from the Mermaid PR Extractor.md
+/node_modules
