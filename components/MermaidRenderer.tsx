@@ -7,8 +7,12 @@ interface MermaidRendererProps {
   onClick?: () => void;
 }
 
-// Declare mermaid global
-declare const mermaid: any;
+// Declare mermaid global with proper typing
+declare global {
+  interface Window {
+    mermaid: any;
+  }
+}
 
 const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, onClick }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,23 +27,60 @@ const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, 
       if (!code) return;
 
       // Wait for mermaid to be available
-      if (typeof mermaid === 'undefined') {
-        const checkMermaid = () => {
-          if (typeof mermaid !== 'undefined') {
+      if (typeof window.mermaid === 'undefined') {
+        const MAX_POLL_ATTEMPTS = 50; // ~5 seconds timeout
+        let pollAttempts = 0;
+        let timeoutId: NodeJS.Timeout | null = null;
+
+        const checkMermaid = async () => {
+          if (!isMounted) return;
+          
+          if (typeof window.mermaid !== 'undefined') {
             setIsLoading(false);
-            renderDiagram();
-          } else {
-            setTimeout(checkMermaid, 100);
+            // Directly proceed with mermaid rendering instead of recursive call
+            try {
+              window.mermaid.initialize({
+                startOnLoad: false,
+                theme: 'dark',
+                securityLevel: 'loose',
+              });
+              
+              const uniqueId = `mermaid-${id.replace(/[^a-zA-Z0-9]/g, '')}`;
+              const { svg } = await window.mermaid.render(uniqueId, code);
+              
+              if (isMounted) {
+                setSvgContent(svg);
+                setError(null);
+              }
+            } catch (err: any) {
+              console.error("Mermaid Render Error:", err);
+              if (isMounted) {
+                setError('Failed to render diagram. Syntax might be invalid.');
+              }
+            }
+          } else if (pollAttempts < MAX_POLL_ATTEMPTS) {
+            pollAttempts++;
+            timeoutId = setTimeout(checkMermaid, 100);
+          } else if (isMounted) {
+            setIsLoading(false);
+            setError('Failed to load diagram renderer. Please check your connection and try again.');
           }
         };
+        
         checkMermaid();
-        return;
+        
+        // Cleanup function to clear pending timeout
+        return () => {
+          if (timeoutId) {
+            clearTimeout(timeoutId);
+          }
+        };
       }
 
       setIsLoading(false);
 
       try {
-        mermaid.initialize({
+        window.mermaid.initialize({
           startOnLoad: false,
           theme: 'dark', // We force dark theme for consistency with our default UI, or could be dynamic
           securityLevel: 'loose',
@@ -50,7 +91,7 @@ const MermaidRenderer: React.FC<MermaidRendererProps> = ({ code, id, className, 
         
         // Try to parse/render
         // Note: mermaid.render returns an object { svg } in v10+
-        const { svg } = await mermaid.render(uniqueId, code);
+        const { svg } = await window.mermaid.render(uniqueId, code);
         
         if (isMounted) {
           setSvgContent(svg);

@@ -20,8 +20,7 @@ dist-ssr
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
-*.sw?
-/.qodo
-/node_modules
-/package-lock.json
+.DEV/Client-Side_Mermaid_Repair_Architecture.m4a
+.DEV/Technical Retrospective_ Developing the Mermaid PR Extractor Prototype (v0.1.0).md
+.DEV/The_Mermaid_PR_Extractor.mp4
+.DEV/Visualizing the Invisible_ 5 Surprising Insights from the Mermaid PR Extractor.md

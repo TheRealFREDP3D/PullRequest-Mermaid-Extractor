@@ -6,6 +6,46 @@ import { Diagram, Theme, GitHubPR } from './types';
 import DiagramCard from './components/DiagramCard';
 import DiagramModal from './components/DiagramModal';
 
+// Demo data constants
+const DEMO_DIAGRAMS: Diagram[] = [
+  {
+    id: 'demo-1',
+    prNumber: 12345,
+    prTitle: 'Feature: Add new diagram support',
+    prState: 'open',
+    prUrl: 'https://github.com/microsoft/vscode/pull/12345',
+    author: 'demo-user',
+    authorAvatar: 'https://github.com/github.png',
+    sourceType: 'description',
+    code: `graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B`,
+    createdAt: new Date().toISOString()
+  },
+  {
+    id: 'demo-2',
+    prNumber: 12346,
+    prTitle: 'Update architecture diagram',
+    prState: 'merged',
+    prUrl: 'https://github.com/microsoft/vscode/pull/12346',
+    author: 'demo-user-2',
+    authorAvatar: 'https://github.com/github.png',
+    sourceType: 'comment',
+    code: `sequenceDiagram
+    participant Client
+    participant Server
+    participant Database
+    
+    Client->>Server: Request data
+    Server->>Database: Query
+    Database-->>Server: Results
+    Server-->>Client: Response`,
+    createdAt: new Date().toISOString()
+  }
+];
+
 const App: React.FC = () => {
   // State
   const [token, setToken] = useState<string>(localStorage.getItem('gh_token') || '');
@@ -49,6 +89,12 @@ const App: React.FC = () => {
     localStorage.removeItem('gh_token');
     setIsAuthenticated(false);
     setDiagrams([]);
+  };
+
+  const handleEnterDemoMode = () => {
+    setRepoInput('microsoft/vscode');
+    setDiagrams(DEMO_DIAGRAMS);
+    setError('Demo mode: Showing sample diagrams. Connect with a GitHub token to scan real repositories.');
   };
 
   const fetchDiagrams = async () => {
@@ -218,51 +264,7 @@ const App: React.FC = () => {
                   
                   <div className="flex items-center justify-center">
                     <button
-                      onClick={() => {
-                        // Load demo data
-                        setRepoInput('microsoft/vscode');
-                        // Add some sample demo diagrams
-                        const demoDiagrams: Diagram[] = [
-                          {
-                            id: 'demo-1',
-                            prNumber: 12345,
-                            prTitle: 'Feature: Add new diagram support',
-                            prState: 'open',
-                            prUrl: 'https://github.com/microsoft/vscode/pull/12345',
-                            author: 'demo-user',
-                            authorAvatar: 'https://github.com/github.png',
-                            sourceType: 'description',
-                            code: `graph TD
-    A[Start] --> B{Is it working?}
-    B -->|Yes| C[Great!]
-    B -->|No| D[Debug]
-    D --> B`,
-                            createdAt: new Date().toISOString()
-                          },
-                          {
-                            id: 'demo-2',
-                            prNumber: 12346,
-                            prTitle: 'Update architecture diagram',
-                            prState: 'merged',
-                            prUrl: 'https://github.com/microsoft/vscode/pull/12346',
-                            author: 'demo-user-2',
-                            authorAvatar: 'https://github.com/github.png',
-                            sourceType: 'comment',
-                            code: `sequenceDiagram
-    participant Client
-    participant Server
-    participant Database
-    
-    Client->>Server: Request data
-    Server->>Database: Query
-    Database-->>Server: Results
-    Server-->>Client: Response`,
-                            createdAt: new Date().toISOString()
-                          }
-                        ];
-                        setDiagrams(demoDiagrams);
-                        setError('Demo mode: Showing sample diagrams. Connect with a GitHub token to scan real repositories.');
-                      }}
+                      onClick={handleEnterDemoMode}
                       className="w-full px-4 py-2 rounded border font-medium transition-all hover:opacity-80 text-sm"
                       style={{ borderColor: colors.border, color: colors.text }}
                     >

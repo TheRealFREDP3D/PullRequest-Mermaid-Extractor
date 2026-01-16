@@ -60,8 +60,7 @@ A web application that extracts Mermaid diagrams from GitHub pull requests, allo
    - Export diagrams using the download buttons in the modal
 
 ![Scan Result](docs/mermaid-listing.png)  
-
-![Diagram Detail](docs/diagram-detail.png)  
+![Diagram Detail](docs/details.png)
 
 ## Project Structure
 
