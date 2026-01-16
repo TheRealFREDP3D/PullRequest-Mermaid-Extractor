@@ -56,6 +56,13 @@ const App: React.FC = () => {
       setError('Please use "owner/repo" format');
       return;
     }
+    
+    // Check if user is authenticated
+    if (!isAuthenticated) {
+      setError('Authentication required to scan repositories. Please enter your GitHub token.');
+      return;
+    }
+    
     const [owner, repo] = repoInput.split('/');
     
     setLoading(true);
@@ -120,7 +127,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col font-sans transition-colors duration-200">
-      
       {/* Navbar */}
       <header 
         className="h-16 border-b flex items-center justify-between px-6 sticky top-0 z-40 backdrop-blur-md bg-opacity-90"
@@ -134,6 +140,21 @@ const App: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Auth Status */}
+          <div className="flex items-center gap-2 text-sm">
+            {isAuthenticated ? (
+              <>
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span className="opacity-70">Connected</span>
+              </>
+            ) : (
+              <>
+                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                <span className="opacity-70">Demo Mode</span>
+              </>
+            )}
+          </div>
+
           <select 
             value={theme}
             onChange={(e) => setTheme(e.target.value as Theme)}
@@ -160,53 +181,108 @@ const App: React.FC = () => {
       {/* Main Content */}
       <main className="flex-1 container mx-auto px-4 py-8">
         
-        {!isAuthenticated ? (
-          /* Login Screen */
-          <div className="max-w-md mx-auto mt-20 p-8 rounded-xl border shadow-xl" style={{ backgroundColor: colors.card, borderColor: colors.border }}>
-            <div className="text-center mb-8">
-              <Github className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <h2 className="text-2xl font-bold">Authentication Required</h2>
-              <p className="mt-2 text-sm opacity-60">
-                Please enter your GitHub Personal Access Token to access repository data.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-1 opacity-80">GitHub Token</label>
-                <input
-                  type="password"
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                  placeholder="ghp_..."
-                  className="w-full px-4 py-2 rounded border bg-transparent focus:ring-2 focus:outline-none transition-all"
-                  style={{ borderColor: colors.border, color: colors.text }}
-                />
-              </div>
-
-              {error && (
-                <div className="flex items-center gap-2 text-red-400 text-sm bg-red-900/10 p-3 rounded">
-                  <AlertCircle className="w-4 h-4" /> {error}
+        {/* Authentication Banner */}
+        {!isAuthenticated && (
+          <div className="max-w-4xl mx-auto mb-8 p-6 rounded-xl border shadow-lg" style={{ backgroundColor: colors.card, borderColor: colors.border }}>
+            <div className="flex items-start gap-4">
+              <Github className="w-8 h-8 mt-1 opacity-50 flex-shrink-0" />
+              <div className="flex-1">
+                <h2 className="text-xl font-bold mb-2">Welcome to Mermaid PR Extractor</h2>
+                <p className="text-sm opacity-80 mb-4">
+                  Discover and visualize Mermaid diagrams from GitHub pull requests. Enter a GitHub token to scan any repository, or try our demo mode.
+                </p>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2 opacity-80">GitHub Token (Optional)</label>
+                    <div className="flex gap-2">
+                      <input
+                        type="password"
+                        value={token}
+                        onChange={(e) => setToken(e.target.value)}
+                        placeholder="ghp_..."
+                        className="flex-1 px-3 py-2 rounded border bg-transparent focus:ring-2 focus:outline-none transition-all text-sm"
+                        style={{ borderColor: colors.border, color: colors.text }}
+                      />
+                      <button
+                        onClick={handleLogin}
+                        disabled={loading || !token}
+                        className="px-4 py-2 rounded font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        style={{ backgroundColor: colors.accent, color: '#fff' }}
+                      >
+                        {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Connect'}
+                      </button>
+                    </div>
+                    <p className="text-xs opacity-40 mt-2">Tokens are stored locally in your browser.</p>
+                  </div>
+                  
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={() => {
+                        // Load demo data
+                        setRepoInput('microsoft/vscode');
+                        // Add some sample demo diagrams
+                        const demoDiagrams: Diagram[] = [
+                          {
+                            id: 'demo-1',
+                            prNumber: 12345,
+                            prTitle: 'Feature: Add new diagram support',
+                            prState: 'open',
+                            prUrl: 'https://github.com/microsoft/vscode/pull/12345',
+                            author: 'demo-user',
+                            authorAvatar: 'https://github.com/github.png',
+                            sourceType: 'description',
+                            code: `graph TD
+    A[Start] --> B{Is it working?}
+    B -->|Yes| C[Great!]
+    B -->|No| D[Debug]
+    D --> B`,
+                            createdAt: new Date().toISOString()
+                          },
+                          {
+                            id: 'demo-2',
+                            prNumber: 12346,
+                            prTitle: 'Update architecture diagram',
+                            prState: 'merged',
+                            prUrl: 'https://github.com/microsoft/vscode/pull/12346',
+                            author: 'demo-user-2',
+                            authorAvatar: 'https://github.com/github.png',
+                            sourceType: 'comment',
+                            code: `sequenceDiagram
+    participant Client
+    participant Server
+    participant Database
+    
+    Client->>Server: Request data
+    Server->>Database: Query
+    Database-->>Server: Results
+    Server-->>Client: Response`,
+                            createdAt: new Date().toISOString()
+                          }
+                        ];
+                        setDiagrams(demoDiagrams);
+                        setError('Demo mode: Showing sample diagrams. Connect with a GitHub token to scan real repositories.');
+                      }}
+                      className="w-full px-4 py-2 rounded border font-medium transition-all hover:opacity-80 text-sm"
+                      style={{ borderColor: colors.border, color: colors.text }}
+                    >
+                      🎯 Try Demo Mode
+                    </button>
+                  </div>
                 </div>
-              )}
-
-              <button
-                onClick={handleLogin}
-                disabled={loading || !token}
-                className="w-full py-2.5 rounded font-medium flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ backgroundColor: colors.accent, color: '#fff' }}
-              >
-                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Authenticate'}
-              </button>
-              
-              <p className="text-xs text-center opacity-40 mt-4">
-                Tokens are stored locally in your browser.
-              </p>
+                
+                {error && (
+                  <div className="flex items-center gap-2 text-red-400 text-sm bg-red-900/10 p-3 rounded mt-4">
+                    <AlertCircle className="w-4 h-4" /> {error}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-        ) : (
-          /* Dashboard */
-          <div className="space-y-8">
+        )}
+
+        {/* Dashboard - Show for both authenticated and demo mode */}
+        <div className="space-y-8">
             {/* Search Bar */}
             <div className="flex flex-col md:flex-row gap-4 items-center justify-center max-w-2xl mx-auto">
               <div className="relative w-full">
@@ -273,8 +349,7 @@ const App: React.FC = () => {
                   <p>Enter a repository to scan for diagrams</p>
                </div>
             )}
-          </div>
-        )}
+        </div>
       </main>
 
       {/* Modal */}
